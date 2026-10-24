@@ -104,6 +104,13 @@ public sealed record class ExportSettings
 	/// </summary>
 	public string[] KeepTypesMissingFromPackages { get; set; } = [];
 
+	/// <summary>
+	/// A script to run on the exported project once the export is complete, such as a game's patch set (.ps1 with
+	/// PowerShell, .sh with bash, anything else directly). It gets the project folder, the one with Assets in it, as its
+	/// argument. Environment variables in the path are expanded. Empty: nothing is run.
+	/// </summary>
+	public string? PostExportScript { get; set; }
+
 	public bool SaveSettingsToDisk { get; set; }
 
 	public string? LanguageCode { get; set; }
@@ -123,5 +130,6 @@ public sealed record class ExportSettings
 		Logger.Info(LogCategory.General, $"{nameof(ReferenceUnityPackages)}: {ReferenceUnityPackages}");
 		Logger.Info(LogCategory.General, $"{nameof(UnityEditorPath)}: {UnityEditorPath ?? "(automatic)"}");
 		Logger.Info(LogCategory.General, $"{nameof(DecompiledAssemblies)}: {(DecompiledAssemblies.Length > 0 ? string.Join(", ", DecompiledAssemblies) : "(none)")}");
+		Logger.Info(LogCategory.General, $"{nameof(PostExportScript)}: {PostExportScript ?? "(none)"}");
 	}
 }

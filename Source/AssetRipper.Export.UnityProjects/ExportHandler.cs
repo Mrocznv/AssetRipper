@@ -178,6 +178,8 @@ public class ExportHandler
 		yield return new DllPostExporter();
 		yield return new DependencyReportPostExporter();
 		yield return new PathIdMapExporter();
+		// Last, so the script sees the finished project.
+		yield return new PostExportScriptPostExporter();
 	}
 
 	public GameData LoadAndProcess(IReadOnlyList<string> paths, FileSystem fileSystem)
